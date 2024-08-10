@@ -60,6 +60,36 @@ function calculateCombinedTax(income) {
     return federalTax + provincialTax;
 }
 
+// Calculate investment portfolio value considering annual savings, returns and fees
+function calculateInvestmentPortfolioValue(portfolioValue, annualSaving, returnRate, feeRate) {
+    return (portfolioValue * (1 + returnRate) * (1 - feeRate)) + annualSaving;
+}
+
+// Calculate investment portfolio growth over n number of years
+function calculateInvestmentPortfolioGrowth(years, initialSalary, salaryGrowthRate, savingsRateCap, returnRate, feeRate) {
+    let investmentPortfolio = 0;
+    let annualSalary = initialSalary;
+
+    for (let year = 1; year <= years; year++) {
+        // Apply assumed salary growth
+        annualSalary = annualSalary * (1 + salaryGrowthRate);
+
+        // Calculate taxes
+        const totalTax = calculateCombinedTax(annualSalary);
+
+        // Calculate net income after tax
+        const netIncome = annualSalary - totalTax;
+
+        // Cap savings rate to specified percentage of net income
+        const annualSaving = netIncome * savingsRateCap;
+
+        // Calculate investment portfolio value after annual fee/tax
+        investmentPortfolio = calculateInvestmentPortfolioValue(investmentPortfolio, annualSaving, returnRate, feeRate);
+    }
+
+    return investmentPortfolio;
+}
+
 /* function updatePlayerNetWorth() {
     const savings = Player.income * Player.savingsRate;
     const tax = calculate
