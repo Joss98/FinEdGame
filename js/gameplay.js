@@ -6,7 +6,7 @@
 
 
 
-// Trigger events based on the current game year and player's status
+// Trigger milestone events based on the current game year and player's status
 
 function triggerMilestoneEvent(player, currentYear) {
     milestoneEvents.forEach(event => {
@@ -22,11 +22,24 @@ function triggerMilestoneEvent(player, currentYear) {
     });
 }
 
-// Simulate the passing of years in the game
+// trigger disruptive events randomly
+function triggerDisruptiveEvent(player) {
+    const eventChance = Math.random();
+    if (eventChance < 0.3) { // 30% chance to trigger a disruptive event
+        const eventIndex = Math.floor(Math.random() * disruptiveEvents.length);
+        const disruptiveEvent = disruptiveEvents[eventIndex];
+        if (disruptiveEvent.prerequisites(player)) {
+            disruptiveEvent.impact(player);
+            logEvent(player.yearsPlayed, disruptiveEvent.name, "A disruptive event occurred: " + disruptiveEvent.description, player);
+        }
+    }
+}
+
+// Simulate passing years and potentially triggering disruptive events
 
 for (let gameYear = 0; gameYear <= 45; gameYear++) {
-    player.age = gameYear + 18; // Mapping game year to player age
-    triggerMilestoneEvent(player, gameYear);
+    player.age = gameYear + 18; // Map game year to player age
+    triggerDisruptiveEvent(player);
     player.yearsPlayed += 1;
 }
 

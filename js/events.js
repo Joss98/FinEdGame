@@ -343,3 +343,221 @@ const milestoneEvents = [
         }
     }
 ];
+
+const disruptiveEvents = [
+    // Positive Disruptive Events
+    {
+        name: "Unexpected Inheritance",
+        description: "You have received an unexpected inheritance.",
+        impact: function(player) {
+            player.netWorth += 50000; // Example increase in net worth
+            player.interestRate += 0.02; // Potential increase in interest rate if invested
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Stock Market Boom",
+        description: "The stock market is booming! Your investments have paid off.",
+        impact: function(player) {
+            player.netWorth += 40000; // Increase in net worth from investments
+            player.interestRate += 0.01; // Increase in interest rate
+            player.expenseRate += 0.05; // Possible lifestyle inflation
+        },
+        prerequisites: function(player) {
+            return player.netWorth > 50000; // Only if the player has investments
+        }
+    },
+    {
+        name: "Career Windfall",
+        description: "You receive a lucrative job offer or promotion.",
+        impact: function(player) {
+            player.income += 20000; // Significant increase in income
+            player.savingsRate += 0.1; // Increase in savings rate
+        },
+        prerequisites: function(player) {
+            return player.income > 0; // Only if the player is employed
+        }
+    },
+    {
+        name: "High-Yield Investment",
+        description: "One of your investments has yielded high returns.",
+        impact: function(player) {
+            player.netWorth += 30000; // Increase in net worth from successful investment
+            player.interestRate += 0.02; // Increase in interest rate
+        },
+        prerequisites: function(player) {
+            return player.netWorth > 50000; // Only if the player has sufficient savings or investments
+        }
+    },
+    {
+        name: "Debt Forgiveness",
+        description: "You receive debt forgiveness or loan repayment assistance.",
+        impact: function(player) {
+            player.expenseRate -= 0.1; // Decrease in expenses due to reduced debt
+            player.netWorth += 20000; // Increase in net worth due to reduced liabilities
+        },
+        prerequisites: function(player) {
+            return player.netWorth < 50000; // Only if the player has debt or low net worth
+        }
+    },
+    {
+        name: "Discovery of a Passion or Skill",
+        description: "You discover a new passion or skill that you can monetize.",
+        impact: function(player) {
+            player.income += 10000; // Increase in income if monetized
+            player.happiness += 10; // Increase in happiness (if tracked)
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    // Negative Disruptive Events
+    {
+        name: "Economic Recession",
+        description: "The economy is in a recession. Your income and investments are affected.",
+        impact: function(player) {
+            player.income -= 10000; // Decrease in income
+            player.netWorth -= 20000; // Decrease in net worth due to investment losses
+            player.expenseRate += 0.05; // Increase in expenses due to inflation
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Market Crash",
+        description: "The stock market has crashed, and your investments have taken a hit.",
+        impact: function(player) {
+            player.netWorth -= 30000; // Significant decrease in net worth
+            player.interestRate -= 0.02; // Potential decrease in interest rate
+        },
+        prerequisites: function(player) {
+            return player.netWorth > 50000; // Only if the player has significant investments
+        }
+    },
+    {
+        name: "Job Loss",
+        description: "You have unexpectedly lost your job.",
+        impact: function(player) {
+            player.income = 0; // Immediate loss of income
+            player.expenseRate += 0.1; // Increase in expenses due to job search or lack of income
+            player.savingsRate -= 0.05; // Decrease in savings rate
+        },
+        prerequisites: function(player) {
+            return player.income > 0; // Only if the player is employed
+        }
+    },
+    {
+        name: "Natural Disaster",
+        description: "A natural disaster has struck, causing damage to your property.",
+        impact: function(player) {
+            player.netWorth -= 20000; // Decrease in net worth due to property damage
+            player.expenseRate += 0.05; // Increase in expenses for repairs
+            player.homeValue -= 10000; // Decrease in home value (if tracked)
+        },
+        prerequisites: function(player) {
+            return player.hasHome; // Only if the player owns a home
+        }
+    },
+    {
+        name: "Unexpected Legal Issue",
+        description: "You are facing an unexpected legal issue that requires financial attention.",
+        impact: function(player) {
+            player.netWorth -= 15000; // Decrease in net worth due to legal fees
+            player.expenseRate += 0.05; // Increase in expenses due to ongoing legal costs
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Family Emergency",
+        description: "A family emergency requires you to provide financial support.",
+        impact: function(player) {
+            player.netWorth -= 10000; // Decrease in net worth due to financial support
+            player.expenseRate += 0.05; // Increase in expenses
+            player.yearsPlayed += 1; // Delay in progress (if applicable)
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Unexpected Birth of a Child",
+        description: "You unexpectedly have a child, leading to increased expenses.",
+        impact: function(player) {
+            player.expenseRate += 0.2; // Significant increase in expenses due to child-related costs
+            player.savingsRate -= 0.05; // Decrease in savings rate
+            player.hasChildren = true; // The player now has children
+        },
+        prerequisites: function(player) {
+            return !player.hasChildren; // Only if the player does not already have children
+        }
+    },
+    {
+        name: "Identity Theft or Fraud",
+        description: "You have been a victim of identity theft or fraud, impacting your finances.",
+        impact: function(player) {
+            player.netWorth -= 15000; // Decrease in net worth due to fraud recovery costs
+            player.expenseRate += 0.05; // Increase in expenses due to recovery efforts
+            player.interestRate -= 0.01; // Potential decrease in interest rate if credit is impacted
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    // Mixed Disruptive Events (Positive or Negative Depending on Choices)
+    {
+        name: "Unexpected Relocation",
+        description: "You have the opportunity to relocate, which may affect your finances.",
+        impact: function(player) {
+            let relocationOutcome = Math.random(); // Random outcome
+            if (relocationOutcome > 0.5) {
+                player.income += 15000; // Increase in income if it's a job promotion
+                player.expenseRate += 0.1; // Increase in expenses due to moving costs
+            } else {
+                player.netWorth -= 10000; // Decrease in net worth due to moving costs
+            }
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Inheritance with Conditions",
+        description: "You have received an inheritance, but there are conditions attached.",
+        impact: function(player) {
+            player.netWorth += 50000; // Increase in net worth due to inheritance
+            let conditionOutcome = Math.random(); // Random outcome
+            if (conditionOutcome > 0.5) {
+                player.expenseRate += 0.1; // Increase in expenses due to conditions (e.g., starting a business)
+                player.savingsRate -= 0.05; // Decrease in savings rate
+            } else {
+                player.income += 10000; // Increase in income if the condition leads to business success
+            }
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    },
+    {
+        name: "Career Change Due to Automation/Industry Change",
+        description: "Your industry is changing due to automation, forcing a career change.",
+        impact: function(player) {
+            player.income -= 10000; // Initial decrease in income
+            let retrainOutcome = Math.random(); // Random outcome
+            if (retrainOutcome > 0.5) {
+                player.income += 20000; // Increase in income after retraining or moving to a high-demand field
+                player.expenseRate += 0.1; // Increase in expenses due to retraining costs
+            } else {
+                player.income += 5000; // Smaller increase in income
+            }
+        },
+        prerequisites: function(player) {
+            return true; // Random chance for any player
+        }
+    }
+];
+
