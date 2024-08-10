@@ -20,5 +20,16 @@ const Player = {
 };
 
 function initialisePlayer(parentChoice) {
-    // TODO: Implement logic to initialise relevant player variables based on parent choice (difficulty level)
+    switch (parentChoice) {
+        case 'DualIncome':
+            Player.netWorth = 10000;
+            Player.savingsRate = 0.1;
+            break;
+        case 'SingeIncome':
+            Player.netWorth = 1000;
+            Player.savingsRate = 0.05;
+            break;
+        default:
+            console.log("Invalid parent choice");
+    }
 }
