@@ -17,7 +17,7 @@ function calculateFederalTax(income) {
     const initialBrackets = [53359, 106717, 165430, 228449];
     const initialRates = [0.15, 0.205, 0.26, 0.29, 0.33];
 
-    let tax = o;
+    let tax = 0;
     if (income <= initialBrackets[0]) {
         tax = income * initialRates[0];
     } else if (income <= initialBrackets[1]) {
