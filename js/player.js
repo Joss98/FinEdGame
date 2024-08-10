@@ -10,13 +10,22 @@
 const Player = {
     netWorth: 0,
     income: 0,
+    incomePotential: 0,
     savingsRate: 0.1,   // Default 10% savings rate
     expenseRate: 0.7,     // Default 70% of income goes to expenses
     taxRate: 0.25,         // Default 25% tax rate
     interestRate: 0.05,     // Default 5% annual interest rate
     yearsPlayed: 0,
+    age: 18,
     futureValueAnnuity: 0,
-    // Other variables will need to be tracked as game scope grows
+    isStudent: false,
+    isGraduate: false,
+    isWorking: false,
+    isMarried: false,
+    hasHome: false,
+    hasChildren: false,
+    parentsAge: 0,
+    childrenAge: 0,
 };
 
 function initialisePlayer(parentChoice) {
