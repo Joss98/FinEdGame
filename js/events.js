@@ -2,3 +2,16 @@
 // Scope:
 //  - Define structure of life events
 //  - Implement functions to trigger and process events
+
+
+
+
+// Generate random events
+function generateRandomEvent() {
+    // TODO
+}
+
+// Process event
+function processEvent(event) {
+    // TODO
+}
