@@ -61,11 +61,13 @@ function calculateCombinedTax(income) {
 }
 
 // Calculate investment portfolio value considering annual savings, returns and fees
+
 function calculateInvestmentPortfolioValue(portfolioValue, annualSaving, returnRate, feeRate) {
     return (portfolioValue * (1 + returnRate) * (1 - feeRate)) + annualSaving;
 }
 
 // Calculate investment portfolio growth over n number of years
+
 function calculateInvestmentPortfolioGrowth(years, initialSalary, salaryGrowthRate, savingsRateCap, returnRate, feeRate) {
     let investmentPortfolio = 0;
     let annualSalary = initialSalary;
@@ -89,8 +91,3 @@ function calculateInvestmentPortfolioGrowth(years, initialSalary, salaryGrowthRa
 
     return investmentPortfolio;
 }
-
-/* function updatePlayerNetWorth() {
-    const savings = Player.income * Player.savingsRate;
-    const tax = calculate
-} */
