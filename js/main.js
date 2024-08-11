@@ -45,6 +45,7 @@ function updateUI() {
     document.getElementById('savings-rate').textContent = (player.savingsRate * 100).toFixed(2) + '%';
     document.getElementById('expense-rate').textContent = (player.expenseRate * 100).toFixed(2) + '%';
     document.getElementById('current-year').textContent = currentYear;
+    document.getElementById('player-age').textContent = player.age;
 }
 
 function nextYear() {
