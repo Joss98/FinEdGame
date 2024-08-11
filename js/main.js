@@ -23,7 +23,11 @@ function initialiseGame() {
         age: 18,
         futureValueAnnuity: 0,
         isStudent: false,
+        hasStudentLoans: false,
         isGraduate: false,
+        hasCorporateJob: false,
+        hasSmallBusiness: false,
+        hasPublicSectorJob: false,
         isWorking: false,
         isMarried: false,
         hasHome: false,
@@ -46,8 +50,12 @@ function updateUI() {
 function nextYear() {
     currentYear += 1;
     player.age = currentYear + 18;
-    triggerDisruptiveEvent(player);
+    player.parentsAge = currentYear + 46;
+    if (player.hasChildren === true) {
+        player.childrenAge++
+    }
     triggerMilestoneEvent(player, currentYear);
+    // triggerDisruptiveEvent(player);
     updateUI();
 }
 

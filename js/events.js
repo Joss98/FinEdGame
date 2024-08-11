@@ -10,19 +10,23 @@
 const milestoneEvents = [
     {
         name: "Choosing Post-Secondary Education",
-        year: 0,  // Game Year 0 corresponds to Player Age 18
+        year: 1,  // Game Year 1 corresponds to Player Age 19
         description: "You must decide on your educational path.",
         choices: {
             "Attend University (undergraduate and graduate school)": function(player) {
                 player.netWorth -= 30000; // Example tuition cost
                 player.incomePotential += 50000; // Increase future income potential
+                player.isStudent = true;
             },
             "Attend CEGEP alone": function(player) {
                 player.netWorth -= 10000; // Lower tuition cost
                 player.incomePotential += 25000; // Moderate increase in future income potential
+                player.isStudent = true;
             },
             "Start Working Full-Time": function(player) {
                 player.income += 25000; // Immediate income from full-time job
+                player.isStudent = false;
+                player.isWorking = true;
             }
         },
         prerequisites: function(player) {
@@ -31,15 +35,19 @@ const milestoneEvents = [
     },
     {
         name: "Student Loan Decision",
-        year: 1,  // Game Year 1 corresponds to Player Age 19
+        year: 2,  // Game Year 2 corresponds to Player Age 20
         description: "You need to decide how to finance your education.",
         choices: {
             "Take Out Student Loans": function(player) {
                 player.netWorth -= 20000; // Loan debt
                 player.incomePotential += 50000; // Increase future income potential
+                player.hasStudentLoans = true;
+                player.isGraduate = true;
             },
             "Pay as You Go": function(player) {
                 player.netWorth -= 5000; // Slower increase due to part-time work
+                player.hasStudentLoans = false;
+                player.isGraduate = true;
             }
         },
         prerequisites: function(player) {
@@ -54,14 +62,20 @@ const milestoneEvents = [
             "Corporate Job": function(player) {
                 player.income += 50000;
                 player.expenseRate += 0.1; // Lifestyle inflation
+                player.hasCorporateJob = true;
+                player.isWorking = true;
             },
             "Small Business": function(player) {
                 player.income += 30000; // Variable income
                 player.netWorth += Math.random() * 20000 - 10000; // Potential for gain or loss
+                player.hasSmallBusiness = true;
+                player.isWorking = true;
             },
             "Non-Profit or Public Sector": function(player) {
                 player.income += 35000;
                 player.savingsRate += 0.05; // Higher savings rate due to stable expenses
+                player.hasPublicSectorJob = true;
+                player.isWorking = true;
             }
         },
         prerequisites: function(player) {
@@ -84,6 +98,23 @@ const milestoneEvents = [
         },
         prerequisites: function(player) {
             return !player.isMarried; // Only if the player is not already married
+        }
+    },
+    {
+        name: "Children or Childfree",
+        year: 8,  // Game Year 8 corresponds to Player Age 26
+        description: "Do you have children or remain childfree?",
+        choices: {
+            "Have Children": function(player) {
+                player.expenseRate += 0.3; // Family expenses
+                player.hasChildren = true;
+            },
+            "Remain Childfree": function(player) {
+                // No changes
+            }
+        },
+        prerequisites: function(player) {
+            return !player.hasChildren; // Only if the player does not already have children
         }
     },
     {
@@ -122,7 +153,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function(player) {
-            return !player.hasHome && player.netWorth > 30000; // Only if the player doesn't already own a home
+            return !player.hasHome && player.netWorth > 40000; // Only if the player doesn't already own a home and has sufficient savings
         }
     },
     {
@@ -139,7 +170,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function(player) {
-            return player.income > 0; // Only if the player is employed
+            return player.isWorking; // Only if the player is employed
         }
     },
     {
@@ -161,7 +192,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function(player) {
-            return player.netWorth > 50000; // Only if the player has sufficient savings
+            return player.netWorth > 50000 && !player.hasSmallBusiness; // Only if the player has sufficient savings and doesn't already have a small business
         }
     },
     {
@@ -214,7 +245,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function(player) {
-            return player.income > 0; // Only if the player is employed
+            return player.isWorking; // Only if the player is employed
         }
     },
     {
@@ -236,9 +267,9 @@ const milestoneEvents = [
         }
     },
     {
-        name: "Supporting Aging Parents",
+        name: "Supporting Ageing Parents",
         year: 27,  // Game Year 27 corresponds to Player Age 45
-        description: "Your aging parents need financial support. How do you respond?",
+        description: "Your ageing parents need financial support. How do you respond?",
         choices: {
             "Provide Support": function(player) {
                 player.netWorth -= 20000; // Cost of support
@@ -273,7 +304,7 @@ const milestoneEvents = [
     {
         name: "Retirement Planning",
         year: 32,  // Game Year 32 corresponds to Player Age 50
-        description: "It's time to start thinking seriously about retirement. How will you plan for it?",
+        description: "How will you plan for your retirement?",
         choices: {
             "Aggressive Saving": function(player) {
                 player.savingsRate += 0.15; // Significant increase in savings rate
@@ -284,7 +315,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function(player) {
-            return player.age >= 50; // Only if the player is 50 years old or older
+            return player.age >= 50 && player.isWorking; // Only if the player is 50 years old or older and still working
         }
     },
     {
