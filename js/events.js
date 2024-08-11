@@ -336,7 +336,7 @@ const milestoneEvents = [
 ];
 
 // TODO: disruptiveEvents need a lot of fine tuning for game balance purposes. Do not use in main gameplay loop until reworked and tested with players.
-const disruptiveEvents = [
+/* const disruptiveEvents = [
     // Positive Disruptive Events
     {
         name: "Unexpected Inheritance",
@@ -551,5 +551,5 @@ const disruptiveEvents = [
             return true; // Random chance for any player
         }
     }
-];
+]; */
 
