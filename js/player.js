@@ -10,7 +10,6 @@
 const Player = {
     netWorth: 0,
     income: 0,
-    incomePotential: 0,
     savingsRate: 0.1,   // Default 10% savings rate
     expenseRate: 0.7,     // Default 70% of income goes to expenses
     taxRate: 0.25,         // Default 25% tax rate
@@ -19,6 +18,8 @@ const Player = {
     age: 18,
     futureValueAnnuity: 0,
     isStudent: false,
+    educationLevel: "",
+    educationDebt: 0,
     hasStudentLoans: false,
     isGraduate: false,
     hasCorporateJob: false,
@@ -26,8 +27,18 @@ const Player = {
     hasPublicSectorJob: false,
     isWorking: false,
     isMarried: false,
+    DualIncome: false,
+    startupInvestment: false,
     hasHome: false,
+    homeDebt: 0,
     hasChildren: false,
+    windfallDecision: "",
+    renovationDecision: "",
+    divorceDecision: "",
+    childrenCollegeDecision: "",
+    emptyNestDecision: "",
+    earlyRetirementDecision: "",
+    finalRetirementDecision: "",
     parentsAge: 0,
     childrenAge: 0,
 };

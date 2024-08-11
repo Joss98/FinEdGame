@@ -14,14 +14,12 @@ const milestoneEvents = [
         description: "You must decide on your educational path.",
         choices: {
             "Attend University (undergraduate and graduate school)": function(player) {
-                player.netWorth -= 30000; // Example tuition cost
-                player.incomePotential += 50000; // Increase future income potential
                 player.isStudent = true;
+                player.educationLevel = "university";
             },
             "Attend CEGEP alone": function(player) {
-                player.netWorth -= 10000; // Lower tuition cost
-                player.incomePotential += 25000; // Moderate increase in future income potential
                 player.isStudent = true;
+                player.educationLevel = "cegep";
             },
             "Start Working Full-Time": function(player) {
                 player.income += 25000; // Immediate income from full-time job
@@ -39,15 +37,13 @@ const milestoneEvents = [
         description: "You need to decide how to finance your education.",
         choices: {
             "Take Out Student Loans": function(player) {
-                player.netWorth -= 20000; // Loan debt
-                player.incomePotential += 50000; // Increase future income potential
                 player.hasStudentLoans = true;
+                player.educationDebt += 20000; // Student debt
                 player.isGraduate = true;
             },
             "Pay as You Go": function(player) {
-                player.netWorth -= 5000; // Slower increase due to part-time work
                 player.hasStudentLoans = false;
-                player.isGraduate = true;
+                player.educationDebt = 5000; // Smaller amount of student debt
             }
         },
         prerequisites: function(player) {
@@ -60,20 +56,14 @@ const milestoneEvents = [
         description: "You're entering the workforce full-time. How will you start your career?",
         choices: {
             "Corporate Job": function(player) {
-                player.income += 50000;
-                player.expenseRate += 0.1; // Lifestyle inflation
                 player.hasCorporateJob = true;
                 player.isWorking = true;
             },
             "Small Business": function(player) {
-                player.income += 30000; // Variable income
-                player.netWorth += Math.random() * 20000 - 10000; // Potential for gain or loss
                 player.hasSmallBusiness = true;
                 player.isWorking = true;
             },
             "Non-Profit or Public Sector": function(player) {
-                player.income += 35000;
-                player.savingsRate += 0.05; // Higher savings rate due to stable expenses
                 player.hasPublicSectorJob = true;
                 player.isWorking = true;
             }
@@ -88,12 +78,12 @@ const milestoneEvents = [
         description: "You have the opportunity to marry or enter a long-term partnership. How do you proceed?",
         choices: {
             "Get Married": function(player) {
-                player.netWorth += 20000; // Dual incomes
-                player.expenseRate += 0.2; // Family expenses
                 player.isMarried = true;
+                player.dualIncome = true;
             },
             "Stay Single": function(player) {
-                // No changes
+                player.isMarried = false;
+                player.dualIncome = false;
             }
         },
         prerequisites: function(player) {
@@ -106,11 +96,10 @@ const milestoneEvents = [
         description: "Do you have children or remain childfree?",
         choices: {
             "Have Children": function(player) {
-                player.expenseRate += 0.3; // Family expenses
                 player.hasChildren = true;
             },
             "Remain Childfree": function(player) {
-                // No changes
+                player.hasChildren = false;
             }
         },
         prerequisites: function(player) {
@@ -120,18 +109,13 @@ const milestoneEvents = [
     {
         name: "Investment Opportunity",
         year: 10,  // Game Year 10 corresponds to Player Age 28
-        description: "You have an opportunity to invest in a promising venture. Do you take the risk?",
+        description: "An old friend presents you with an investment opportunity in their startup. Do you take the risk?",
         choices: {
             "Invest": function(player) {
-                let investmentOutcome = Math.random(); // Random outcome
-                if (investmentOutcome > 0.5) {
-                    player.netWorth += 20000; // Successful investment
-                } else {
-                    player.netWorth -= 10000; // Failed investment
-                }
+                player.startupInvestment = true;
             },
             "Play it Safe": function(player) {
-                // No changes
+                player.startupInvestment = false;
             }
         },
         prerequisites: function(player) {
@@ -144,16 +128,15 @@ const milestoneEvents = [
         description: "You're considering buying your first home. Do you go for it?",
         choices: {
             "Buy a Home": function(player) {
-                player.netWorth -= 50000; // Down payment
-                player.expenseRate += 0.2; // Mortgage expenses
                 player.hasHome = true;
+                player.homeDebt = 50000;
             },
             "Continue Renting": function(player) {
-                // No changes
+                player.hasHome = false;
             }
         },
         prerequisites: function(player) {
-            return !player.hasHome && player.netWorth > 40000; // Only if the player doesn't already own a home and has sufficient savings
+            return !player.hasHome; // Only if the player doesn't already own a home and has sufficient savings
         }
     },
     {
@@ -162,11 +145,10 @@ const milestoneEvents = [
         description: "You have the chance to advance in your career, but it may require additional effort or relocation.",
         choices: {
             "Pursue Promotion": function(player) {
-                player.income += 10000; // Increase income
-                player.expenseRate += 0.1; // Relocation costs
+                player.income += 10000;
             },
             "Stay in Current Role": function(player) {
-                player.income += 5000; // Moderate increase in income
+                player.income += 5000;
             }
         },
         prerequisites: function(player) {
@@ -179,13 +161,7 @@ const milestoneEvents = [
         description: "You have an opportunity to start your own business. Will you take the risk?",
         choices: {
             "Start Business": function(player) {
-                player.netWorth -= 30000; // Startup costs
-                let businessOutcome = Math.random(); // Random outcome
-                if (businessOutcome > 0.5) {
-                    player.income += 40000; // Successful business
-                } else {
-                    player.income -= 10000; // Failed business
-                }
+                player.hasSmallBusiness = true;
             },
             "Stay Employed": function(player) {
                 // No changes
@@ -201,12 +177,10 @@ const milestoneEvents = [
         description: "You receive an unexpected windfall (e.g., inheritance, lottery win). How do you manage it?",
         choices: {
             "Invest the Windfall": function(player) {
-                player.netWorth += 50000; // Increase net worth
-                player.interestRate += 0.02; // Increase in interest rate from investments
+                player.windfallDecision = "invest";
             },
             "Spend the Windfall": function(player) {
-                player.expenseRate += 0.2; // Increase in spending
-                player.happiness += 10; // Temporary increase in happiness (if you track happiness)
+                player.windfallDecision = "spend";
             }
         },
         prerequisites: function(player) {
@@ -219,12 +193,10 @@ const milestoneEvents = [
         description: "Your home is in need of renovation. Do you invest in it?",
         choices: {
             "Full Renovation": function(player) {
-                player.netWorth -= 30000; // Cost of renovation
-                player.homeValue += 50000; // Increase in home value
+                player.renovationDecision = "full reno";
             },
             "Minor Repairs": function(player) {
-                player.netWorth -= 10000; // Lower cost
-                player.homeValue += 20000; // Smaller increase in home value
+                player.renovationDecision = "minor repairs";
             }
         },
         prerequisites: function(player) {
@@ -238,7 +210,6 @@ const milestoneEvents = [
         choices: {
             "Pursue New Opportunities": function(player) {
                 player.income += 15000; // Increase income
-                player.expenseRate += 0.1; // Potentially higher costs with new opportunities
             },
             "Continue in Current Role": function(player) {
                 player.income += 7000; // Moderate income increase
@@ -251,15 +222,15 @@ const milestoneEvents = [
     {
         name: "Divorce or Separation",
         year: 24,  // Game Year 24 corresponds to Player Age 42
-        description: "Your relationship is strained. Do you pursue a divorce or work things out?",
+        description: "Your relationship is strained. Your spouse has cheated on you. Do you pursue a divorce or work things out?",
         choices: {
             "Divorce": function(player) {
-                player.netWorth -= 40000; // Asset division and legal fees
-                player.expenseRate += 0.2; // Increase in expenses due to separation
+                player.divorceDecision = "divorce";
                 player.isMarried = false;
             },
             "Stay Together": function(player) {
-                player.savingsRate += 0.05; // Increase in savings rate if relationship improves
+                player.divorceDecision = "stay married";
+                player.isMarried = true;
             }
         },
         prerequisites: function(player) {
@@ -269,18 +240,17 @@ const milestoneEvents = [
     {
         name: "Supporting Ageing Parents",
         year: 27,  // Game Year 27 corresponds to Player Age 45
-        description: "Your ageing parents need financial support. How do you respond?",
+        description: "Your ageing parents need financial support. What do you do?",
         choices: {
-            "Provide Support": function(player) {
-                player.netWorth -= 20000; // Cost of support
-                player.expenseRate += 0.1; // Increase in expenses
+            "Provide Financial Support": function(player) {
+                player.parentDecision = "support";
             },
-            "Seek External Help": function(player) {
-                player.netWorth -= 10000; // Cost of external help
+            "Ignore Them": function(player) {
+                player.parentDecision = "ignore";
             }
         },
         prerequisites: function(player) {
-            return player.parentsAge >= 75; // Only if the player's parents are elderly
+            return player.parentsAge >= 65; // Only if the player's parents are elderly
         }
     },
     {
@@ -289,12 +259,10 @@ const milestoneEvents = [
         description: "Your children are ready for college. Will you contribute to their education costs?",
         choices: {
             "Pay for Education": function(player) {
-                player.netWorth -= 50000; // Cost of college education
-                player.savingsRate += 0.05; // Increase in savings rate if children later contribute to household
+                player.childrenCollegeDecision = "pay for children's college education";
             },
             "Encourage Student Loans": function(player) {
-                // No immediate impact on net worth
-                // Possible future impact on income if children are burdened with debt
+                player.childrenCollegeDecision = "children take out student loans";
             }
         },
         prerequisites: function(player) {
@@ -306,12 +274,11 @@ const milestoneEvents = [
         year: 32,  // Game Year 32 corresponds to Player Age 50
         description: "How will you plan for your retirement?",
         choices: {
-            "Aggressive Saving": function(player) {
-                player.savingsRate += 0.15; // Significant increase in savings rate
-                player.expenseRate -= 0.1; // Decrease in expenses to save more
+            "Increase Savings Rate": function(player) {
+                player.initialRetirementPlan = "increase saving";
             },
             "Maintain Current Lifestyle": function(player) {
-                // Stable savings rate and expense rate
+                player.initialRetirementPlan = "maintain current lifestyle";
             }
         },
         prerequisites: function(player) {
@@ -324,11 +291,10 @@ const milestoneEvents = [
         description: "Your children have left home. How do you adapt?",
         choices: {
             "Downsize Home": function(player) {
-                player.netWorth += 30000; // Increase in net worth if selling property
-                player.expenseRate -= 0.15; // Decrease in expenses due to downsizing
+                player.emptyNestDecision = "downsize";
             },
             "Maintain Current Lifestyle": function(player) {
-                // Stable expense rate, no change in net worth
+                player.emptyNestDecision = "maintain current lifestyle";
             }
         },
         prerequisites: function(player) {
@@ -341,13 +307,10 @@ const milestoneEvents = [
         description: "You're considering early retirement. Do you retire now or continue working?",
         choices: {
             "Retire Now": function(player) {
-                player.income = 0; // Stop earning income
-                player.savingsRate += 0.1; // Increase in savings rate due to reduced expenses
-                player.netWorth -= 20000; // Potential drawdown on net worth
+                player.earlyRetirementDecision = "retire early at age 55";
             },
             "Continue Working": function(player) {
-                player.income += 10000; // Increase in income
-                player.netWorth += 5000; // Increase in net worth
+                player.earlyRetirementDecision = "continue working";
             }
         },
         prerequisites: function(player) {
@@ -359,14 +322,11 @@ const milestoneEvents = [
         year: 45,  // Game Year 45 corresponds to Player Age 63
         description: "It's time to make your final retirement decision.",
         choices: {
-            "Retire": function(player) {
-                player.income = 0; // Stop earning income
-                player.expenseRate -= 0.2; // Decrease in expenses during retirement
-                player.netWorth -= 30000; // Potential drawdown on net worth
+            "Retire and Stop Working": function(player) {
+                player.finalRetirementDecision = "retire and stop working";
             },
-            "Work Part-Time": function(player) {
-                player.income -= 20000; // Moderate decrease in income
-                player.savingsRate += 0.05; // Increase in savings rate
+            "Retire and Work Part-Time": function(player) {
+                player.finalRetirementDecision = "retire and work part time"
             }
         },
         prerequisites: function(player) {
@@ -375,6 +335,7 @@ const milestoneEvents = [
     }
 ];
 
+// TODO: disruptiveEvents need a lot of fine tuning for game balance purposes. Do not use in main gameplay loop until reworked and tested with players.
 const disruptiveEvents = [
     // Positive Disruptive Events
     {
