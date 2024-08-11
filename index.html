@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinEdGame</title>
+    <title>Financial Education Game</title>
 </head>
 <body>
-    <!-- <h1>Financial Game Test</h1>
+    <h1>Financial Education Game</h1>
+    
+    <!-- Player Attributes -->
+    <div id="player-attributes">
+        <h2>Player Attributes</h2>
+        <p><strong>Net Worth:</strong> <span id="net-worth">0</span></p>
+        <p><strong>Income:</strong> <span id="income">0</span></p>
+        <p><strong>Savings Rate:</strong> <span id="savings-rate">0%</span></p>
+        <p><strong>Expense Rate:</strong> <span id="expense-rate">0%</span></p>
+        <p><strong>Current Year:</strong> <span id="current-year">0</span></p>
+    </div>
+
+    <!-- Event Choices -->
+    <div id="event-choices">
+        <h2>Event Choices</h2>
+        <p id="event-description">No events triggered yet.</p>
+        <button id="choice1" style="display:none"></button>
+        <button id="choice2" style="display:none"></button>
+        <button id="choice3" style="display:none"></button>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls">
+        <button onclick="nextYear()">Next Year</button>
+    </div>
+
     <script src="js/player.js"></script>
     <script src="js/financial.js"></script>
-    <script src="js/main.js"></script> -->
+    <script src="js/events.js"></script>
+    <script src="js/logging.js"></script>
+    <script src="js/gameplay.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
