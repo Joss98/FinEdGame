@@ -34,10 +34,12 @@ function triggerMilestoneEvent(currentYear) {
                     document.getElementById('nextYearButton').disabled = false;
 
                     updateUI();
+                    eventTriggered = true;
                 };
             }
         }
     });
+    eventTriggeredLastYear = eventTriggered;
 }
 
 function nextYear() {
@@ -49,7 +51,12 @@ if (currentYear < 45) { // Only increment if the year is less than 45
         Player.childrenAge++;
     }
     triggerMilestoneEvent(currentYear);
-    showBudgetUI();
+    if (eventTriggeredLastYear) {
+        showBudgetUI();
+    } else {
+        hideBudgetUI();
+    }
+    
     updateUI();
     } else {
         // Disable the nextYear button if the game has reached the final year

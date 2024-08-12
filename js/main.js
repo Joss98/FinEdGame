@@ -6,8 +6,6 @@
 
 
 
-// Initialise game
-
 function initialiseGame() {
     currentYear = 0;
     Player.age = 18;

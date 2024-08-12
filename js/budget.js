@@ -52,4 +52,6 @@ function submitBudget() {
     Player.homeDebt -= (Player.income * (budgetCategories.homeDebtRepayment / 100));
 
     updateUI();
+    hideBudgetUI(); // Hide budget UI after valid submission
+    eventTriggeredLastYear = false; // Reset the flag after submission
 }
