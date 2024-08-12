@@ -17,6 +17,16 @@ function updateUI() {
     document.getElementById('player-age').textContent = Player.age;
 }
 
+function updateBudgetAttributesUI() {
+    document.getElementById('housing-allocation').textContent = budgetCategories.housing;
+    document.getElementById('education-allocation').textContent = budgetCategories.education;
+    document.getElementById('family-allocation').textContent = budgetCategories.family;
+    document.getElementById('transportation-allocation').textContent = budgetCategories.transportation;
+    document.getElementById('discretionary-allocation').textContent = budgetCategories.discretionary;
+    document.getElementById('savings-allocation').textContent = budgetCategories.savings;
+    document.getElementById('homeDebtRepayment-allocation').textContent = budgetCategories.homeDebtRepayment;
+}
+
 function hideChoices() {
     document.getElementById('choice1').style.display = 'none';
     document.getElementById('choice2').style.display = 'none';
