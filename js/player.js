@@ -27,6 +27,7 @@ const Player = {
     hasPublicSectorJob: false,
     isWorking: false,
     isMarried: false,
+    isRetired: false,
     dualIncome: false,
     startupInvestment: false,
     hasHome: false,

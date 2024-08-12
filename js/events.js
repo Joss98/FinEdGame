@@ -308,6 +308,7 @@ const milestoneEvents = [
         choices: {
             "Retire Now": function() {
                 Player.earlyRetirementDecision = "retire early at age 55";
+                Player.isRetired =true;
             },
             "Continue Working": function() {
                 Player.earlyRetirementDecision = "continue working";
@@ -330,7 +331,7 @@ const milestoneEvents = [
             }
         },
         prerequisites: function() {
-            return Player.age >= 63; // Only if the player is 63 years old or older
+            return Player.age >= 63 && !Player.isRetired; // Only if the player is 63 years old or older and not already retired
         }
     }
 ];
