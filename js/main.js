@@ -14,18 +14,5 @@ function initialiseGame() {
     updateUI();
 }
 
-function nextYear() {
-    currentYear += 1;
-    Player.age = currentYear + 18;
-    Player.parentsAge = currentYear + 46;
-    if (Player.hasChildren) {
-        Player.childrenAge++
-    }
-    triggerMilestoneEvent(currentYear);
-    // triggerDisruptiveEvent(Player);
-    showBudgetUI();
-    updateUI();
-}
-
 // Start the game
 initialiseGame();

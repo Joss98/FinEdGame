@@ -55,17 +55,18 @@
             <input type="range" id="homeDebtRepayment" name="homeDebtRepayment" min="0" max="100" value="0" oninput="updateBudget(this.value, 'homeDebtRepayment')">
             <span id="homeDebtRepayment-percent">0%</span><br>
     
-            <button type="button" onclick="submitBudget()">Submit Budget</button>
+            <button id="submitBudgetButton" type="button" onclick="submitBudget()">Submit Budget</button>
         </form>
     </div>
 
     <!-- Controls -->
     <div id="controls">
-        <button onclick="nextYear()">Next Year</button>
+        <button id="nextYearButton" onclick="nextYear()">Next Year</button>
     </div>
 
     <script src="js/player.js"></script>
     <script src="js/financial.js"></script>
+    <script src="js/ui.js"></script>
     <script src="js/budget.js"></script>
     <script src="js/events.js"></script>
     <script src="js/logging.js"></script>

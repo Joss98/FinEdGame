@@ -1,5 +1,13 @@
 // Contains user interface functions
 
+
+
+
+
+
+
+// Main UI
+
 function updateUI() {
     document.getElementById('net-worth').textContent = Player.netWorth;
     document.getElementById('income').textContent = Player.income;
@@ -14,4 +22,14 @@ function hideChoices() {
     document.getElementById('choice2').style.display = 'none';
     document.getElementById('choice3').style.display = 'none';
     document.getElementById('event-description').textContent = 'No events triggered yet.';
+}
+
+// Budget UI
+
+function showBudgetUI() {
+    document.getElementById('budget-ui').style.display = 'block';
+}
+
+function hideBudgetUI() {
+    document.getElementById('budget-ui').style.display = 'none';
 }

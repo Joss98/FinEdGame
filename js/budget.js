@@ -53,11 +53,3 @@ function submitBudget() {
 
     updateUI();
 }
-
-function showBudgetUI() {
-    document.getElementById('budget-ui').style.display = 'block';
-}
-
-function hideBudgetUI() {
-    document.getElementById('budget-ui').style.display = 'none';
-}

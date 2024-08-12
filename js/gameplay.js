@@ -16,6 +16,9 @@ function triggerMilestoneEvent(currentYear) {
             console.log(`Triggering event: ${event.name}`);
             document.getElementById('event-description').textContent = event.description;
 
+            // Disable nextYearButton until player makes a choice
+            document.getElementById('nextYearButton').disabled = true;
+
             // Setup choice buttons
             const choices = Object.keys(event.choices);
             for (let i = 0; i < choices.length; i++) {
@@ -26,11 +29,33 @@ function triggerMilestoneEvent(currentYear) {
                     event.choices[choices[i]](Player);
                     logEvent(currentYear, event.name, `Player chose: ${choices[i]}`, Player);
                     hideChoices();
+
+                    // Enable nextYearButton again after a choice is made
+                    document.getElementById('nextYearButton').disabled = false;
+
                     updateUI();
                 };
             }
         }
     });
+}
+
+function nextYear() {
+if (currentYear < 45) { // Only increment if the year is less than 45
+    currentYear += 1;
+    Player.age = currentYear + 18;
+    Player.parentsAge = currentYear + 46;
+    if (Player.hasChildren) {
+        Player.childrenAge++;
+    }
+    triggerMilestoneEvent(currentYear);
+    showBudgetUI();
+    updateUI();
+    } else {
+        // Disable the nextYear button if the game has reached the final year
+        document.getElementById('nextYearButton').disabled = true;
+        console.log('The game has reached the final year. No further progress can be made.');
+    }
 }
 
 // trigger disruptive events randomly
