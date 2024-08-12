@@ -20,6 +20,11 @@ function logEvent(year, eventName, description, player) {
     gameLog.push(logEntry);
 }
 
+function logEventToConsole(year, eventName, message) {
+    console.log(`Year ${year}: ${eventName} - ${message}`);
+    console.log(`Player's Status: Net Worth: ${Player.netWorth}, Income: ${Player.income}, Savings Rate: ${Player.savingsRate}, Expense Rate: ${Player.expenseRate}`);
+}
+
 function getGameLog() {
     return gameLog;
 }

@@ -1,0 +1,46 @@
+/* Reset some default browser styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #444;
+    font-family: 'Press Start 2P', Courier, monospace;
+}
+
+/* Retro computer outer border */
+.retro-computer {
+    width: 600px;
+    height: 400px;
+    background-color: #222;
+    border: 20px solid #999;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Inner screen */
+.screen {
+    width: 100%;
+    height: 100%;
+    background-color: #0a0;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 0 0 2px #000;
+}
+
+/* Text styling inside the screen */
+.screen p {
+    font-size: 16px;
+    margin: 0;
+}
