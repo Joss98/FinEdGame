@@ -27,17 +27,18 @@ function nextYear() {
     currentYear += 1;
     Player.age = currentYear + 18;
     Player.parentsAge = currentYear + 46;
-    if (Player.hasChildren === true) {
+    if (Player.hasChildren) {
         Player.childrenAge++
     }
-    triggerMilestoneEvent(player, currentYear);
-    // triggerDisruptiveEvent(player);
+    triggerMilestoneEvent(Player, currentYear);
+    // triggerDisruptiveEvent(Player);
+    showBudgetUI();
     updateUI();
 }
 
-function triggerMilestoneEvent(player, currentYear) {
+function triggerMilestoneEvent(currentYear) {
     milestoneEvents.forEach(event => {
-        if (event.year === currentYear && event.prerequisites(player)) {
+        if (event.year === currentYear && event.prerequisites(Player)) {
             document.getElementById('event-description').textContent = event.description;
 
             // Setup choice buttons
@@ -47,8 +48,8 @@ function triggerMilestoneEvent(player, currentYear) {
                 button.textContent = choices[i];
                 button.style.display = 'inline';
                 button.onclick = () => {
-                    event.choices[choices[i]](player);
-                    logEvent(currentYear, event.name, `Player chose: ${choices[i]}`, player);
+                    event.choices[choices[i]](Player);
+                    logEvent(currentYear, event.name, `Player chose: ${choices[i]}`, Player);
                     hideChoices();
                     updateUI();
                 };
