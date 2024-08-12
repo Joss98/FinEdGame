@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Computer Screen</title>
+    <!-- Link to Google Fonts for Press Start 2P -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="retro-computer">
+        <div class="screen">
+            <p>Welcome to the Retro Computer!</p>
+        </div>
+    </div>
+</body>
+</html>
