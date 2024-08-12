@@ -9,14 +9,25 @@
 // Trigger milestone events based on the current game year and player's status
 
 function triggerMilestoneEvent(currentYear) {
+    console.log(`Checking events for year: ${currentYear}`);
     milestoneEvents.forEach(event => {
+        console.log(`Checking event: ${event.name}`);
         if (event.year === currentYear && event.prerequisites(Player)) {
-            let choice = prompt(`${event.description}\nChoices: ${Object.keys(event.choices).join(', ')}`);
-            if (event.choices[choice]) {
-                event.choices[choice](Player);
-                logEvent(currentYear, event.name, `Player chose: ${choice}`, Player);
-            } else {
-                console.log("Invalid choice.");
+            console.log(`Triggering event: ${event.name}`);
+            document.getElementById('event-description').textContent = event.description;
+
+            // Setup choice buttons
+            const choices = Object.keys(event.choices);
+            for (let i = 0; i < choices.length; i++) {
+                const button = document.getElementById(`choice${i+1}`);
+                button.textContent = choices[i];
+                button.style.display = 'inline';
+                button.onclick = () => {
+                    event.choices[choices[i]](Player);
+                    logEvent(currentYear, event.name, `Player chose: ${choices[i]}`, Player);
+                    hideChoices();
+                    updateUI();
+                };
             }
         }
     });
@@ -41,11 +52,4 @@ for (let gameYear = 0; gameYear <= 45; gameYear++) {
     Player.age = gameYear + 18; // Map game year to player age
     // triggerDisruptiveEvent();
     Player.yearsPlayed += 1;
-}
-
-// Should consider moving this function to logging.js ?
-
-function logEvent(year, eventName, message) {
-    console.log(`Year ${year}: ${eventName} - ${message}`);
-    console.log(`Player's Status: Net Worth: ${Player.netWorth}, Income: ${Player.income}, Savings Rate: ${Player.savingsRate}, Expense Rate: ${Player.expenseRate}`);
 }
