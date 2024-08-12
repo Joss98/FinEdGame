@@ -28,7 +28,12 @@
         <button id="choice3" style="display:none"></button>
     </div>
 
-    <div id="budget-ui">
+    <!-- Controls -->
+    <div id="controls">
+        <button id="nextYearButton" onclick="nextYear()">Next Year</button>
+    </div>
+    <br>
+    <div id="budget-ui" style="display: none;">
         <h2>Annual Budget</h2>
         <form id="budget-form">
             <label for="housing">Housing:</label>
@@ -57,11 +62,6 @@
     
             <button id="submitBudgetButton" type="button" onclick="submitBudget()">Submit Budget</button>
         </form>
-    </div>
-
-    <!-- Controls -->
-    <div id="controls">
-        <button id="nextYearButton" onclick="nextYear()">Next Year</button>
     </div>
 
     <script src="js/player.js"></script>
