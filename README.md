@@ -9,8 +9,8 @@ To get started with the project, please refer to the [CONTRIBUTING.md](CONTRIBUT
 ## Project Structure
 
 - **index.html**: The main HTML file for the game.
-- **styles.css**: The CSS file for styling the game interface.
-- **script.js**: The JavaScript file for implementing game logic.
+- **css/**: The CSS files for styling the game interface.
+- **js/**: The JavaScript files for implementing game logic.
 - **images/**: Directory for storing images used in the game.
 
 ## How to Contribute
