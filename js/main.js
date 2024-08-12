@@ -7,53 +7,28 @@
 
 
 // Initialise game
-let player;
 let currentYear = 0;
 
 function initialiseGame() {
-    player = {
-        netWorth: 0,
-        income: 0,
-        incomePotential: 0,
-        savingsRate: 0.1,   // Default 10% savings rate
-        expenseRate: 0.7,     // Default 70% of income goes to expenses
-        taxRate: 0.25,         // Default 25% tax rate
-        interestRate: 0.05,     // Default 5% annual interest rate
-        yearsPlayed: 0,
-        age: 18,
-        futureValueAnnuity: 0,
-        isStudent: false,
-        hasStudentLoans: false,
-        isGraduate: false,
-        hasCorporateJob: false,
-        hasSmallBusiness: false,
-        hasPublicSectorJob: false,
-        isWorking: false,
-        isMarried: false,
-        hasHome: false,
-        hasChildren: false,
-        parentsAge: 0,
-        childrenAge: 0,
-    };
     initialisePlayer('SingleIncome'); // Change the parent choice as needed
     updateUI();
 }
 
 function updateUI() {
-    document.getElementById('net-worth').textContent = player.netWorth;
-    document.getElementById('income').textContent = player.income;
-    document.getElementById('savings-rate').textContent = (player.savingsRate * 100).toFixed(2) + '%';
-    document.getElementById('expense-rate').textContent = (player.expenseRate * 100).toFixed(2) + '%';
+    document.getElementById('net-worth').textContent = Player.netWorth;
+    document.getElementById('income').textContent = Player.income;
+    document.getElementById('savings-rate').textContent = (Player.savingsRate * 100).toFixed(2) + '%';
+    document.getElementById('expense-rate').textContent = (Player.expenseRate * 100).toFixed(2) + '%';
     document.getElementById('current-year').textContent = currentYear;
-    document.getElementById('player-age').textContent = player.age;
+    document.getElementById('player-age').textContent = Player.age;
 }
 
 function nextYear() {
     currentYear += 1;
-    player.age = currentYear + 18;
-    player.parentsAge = currentYear + 46;
-    if (player.hasChildren === true) {
-        player.childrenAge++
+    Player.age = currentYear + 18;
+    Player.parentsAge = currentYear + 46;
+    if (Player.hasChildren === true) {
+        Player.childrenAge++
     }
     triggerMilestoneEvent(player, currentYear);
     // triggerDisruptiveEvent(player);
