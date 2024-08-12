@@ -9,17 +9,60 @@
 // Trigger milestone events based on the current game year and player's status
 
 function triggerMilestoneEvent(currentYear) {
+    console.log(`Checking events for year: ${currentYear}`);
     milestoneEvents.forEach(event => {
+        console.log(`Checking event: ${event.name}`);
         if (event.year === currentYear && event.prerequisites(Player)) {
-            let choice = prompt(`${event.description}\nChoices: ${Object.keys(event.choices).join(', ')}`);
-            if (event.choices[choice]) {
-                event.choices[choice](Player);
-                logEvent(currentYear, event.name, `Player chose: ${choice}`, Player);
-            } else {
-                console.log("Invalid choice.");
+            console.log(`Triggering event: ${event.name}`);
+            document.getElementById('event-description').textContent = event.description;
+
+            // Disable nextYearButton until player makes a choice
+            document.getElementById('nextYearButton').disabled = true;
+
+            // Setup choice buttons
+            const choices = Object.keys(event.choices);
+            for (let i = 0; i < choices.length; i++) {
+                const button = document.getElementById(`choice${i+1}`);
+                button.textContent = choices[i];
+                button.style.display = 'inline';
+                button.onclick = () => {
+                    event.choices[choices[i]](Player);
+                    logEvent(currentYear, event.name, `Player chose: ${choices[i]}`, Player);
+                    hideChoices();
+
+                    // Enable nextYearButton again after a choice is made
+                    document.getElementById('nextYearButton').disabled = false;
+
+                    updateUI();
+                    eventTriggered = true;
+                };
             }
         }
     });
+    eventTriggeredLastYear = eventTriggered;
+}
+
+function nextYear() {
+if (currentYear < 45) { // Only increment if the year is less than 45
+    currentYear += 1;
+    Player.age = currentYear + 18;
+    Player.parentsAge = currentYear + 46;
+    if (Player.hasChildren) {
+        Player.childrenAge++;
+    }
+    triggerMilestoneEvent(currentYear);
+    if (eventTriggeredLastYear) {
+        showBudgetUI();
+    } else {
+        hideBudgetUI();
+    }
+    
+    updateUI();
+    } else {
+        // Disable the nextYear button if the game has reached the final year
+        document.getElementById('nextYearButton').disabled = true;
+        console.log('The game has reached the final year. No further progress can be made.');
+    }
 }
 
 // trigger disruptive events randomly
@@ -41,11 +84,4 @@ for (let gameYear = 0; gameYear <= 45; gameYear++) {
     Player.age = gameYear + 18; // Map game year to player age
     // triggerDisruptiveEvent();
     Player.yearsPlayed += 1;
-}
-
-// Should consider moving this function to logging.js ?
-
-function logEvent(year, eventName, message) {
-    console.log(`Year ${year}: ${eventName} - ${message}`);
-    console.log(`Player's Status: Net Worth: ${Player.netWorth}, Income: ${Player.income}, Savings Rate: ${Player.savingsRate}, Expense Rate: ${Player.expenseRate}`);
 }
