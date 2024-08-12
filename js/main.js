@@ -7,10 +7,10 @@
 
 
 // Initialise game
-let currentYear = 0;
 
 function initialiseGame() {
-    initialisePlayer('SingleIncome'); // Change the parent choice as needed
+    currentYear = 0;
+    Player.age = 18;
     updateUI();
 }
 
@@ -30,15 +30,19 @@ function nextYear() {
     if (Player.hasChildren) {
         Player.childrenAge++
     }
-    triggerMilestoneEvent(Player, currentYear);
+    triggerMilestoneEvent(currentYear);
     // triggerDisruptiveEvent(Player);
     showBudgetUI();
     updateUI();
 }
 
+console.log(typeof currentYear); // should output "number"
 function triggerMilestoneEvent(currentYear) {
+    console.log(`Checking events for year: ${currentYear}`);
     milestoneEvents.forEach(event => {
+        console.log(`Checking event: ${event.name}`);
         if (event.year === currentYear && event.prerequisites(Player)) {
+            console.log(`Triggering event: ${event.name}`);
             document.getElementById('event-description').textContent = event.description;
 
             // Setup choice buttons
