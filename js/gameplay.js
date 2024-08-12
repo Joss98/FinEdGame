@@ -23,7 +23,7 @@ function triggerMilestoneEvent(currentYear) {
 }
 
 // trigger disruptive events randomly
-function triggerDisruptiveEvent() {
+/* function triggerDisruptiveEvent() {
     const eventChance = Math.random();
     if (eventChance < 0.3) { // 30% chance to trigger a disruptive event
         const eventIndex = Math.floor(Math.random() * disruptiveEvents.length);
@@ -33,13 +33,13 @@ function triggerDisruptiveEvent() {
             logEvent(Player.yearsPlayed, disruptiveEvent.name, "A disruptive event occurred: " + disruptiveEvent.description, Player);
         }
     }
-}
+} */
 
 // Simulate passing years and potentially triggering disruptive events
 
 for (let gameYear = 0; gameYear <= 45; gameYear++) {
     Player.age = gameYear + 18; // Map game year to player age
-    triggerDisruptiveEvent();
+    // triggerDisruptiveEvent();
     Player.yearsPlayed += 1;
 }
 
