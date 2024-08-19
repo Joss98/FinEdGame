@@ -36,6 +36,36 @@ function hideChoices() {
 
 // Add interactivity to UI
 
+window.onload = function() {
+    let bootScreen = document.getElementById('boot-screen');
+    let startScreen = document.getElementById('start-screen');
+    
+    // Play Windows 98 startup sound
+    let startupSound = new Audio('assets/sounds/Windows 98 Startup Sound.mp3');
+    startupSound.play();
+
+    // Hide boot screen after animation completes
+    setTimeout(function() {
+        bootScreen.style.display = 'none';
+        startScreen.style.display = 'block';
+    }, 5000);
+};
+
+function closeWindow(id) {
+    let element = document.getElementById(id);
+    element.classList.add('window-close');
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 500); // Match the animation duration
+}
+
+function showBSOD() {
+    document.getElementById('bsod-screen').style.display = 'block';
+    document.body.onkeydown = function() {
+        document.getElementById('bsod-screen').style.display = 'none';
+    };
+}
+
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('milestone-event-screen').style.display = 'block';

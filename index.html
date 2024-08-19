@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accounts Playable</title>
     <link rel="stylesheet" href="css/retro_styles.css">
-    <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/favicon/site.webmanifest">
 </head>
 <body>
-
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+        <div id="boot-logo">
+            <img src="assets/images/boot/Windows_98_logo.svg" alt="Windows 98 Logo">
+        </div>
+        <div id="boot-bar">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+    
     <!-- Start Screen -->
     <div id="start-screen">
         <h1>Accounts Playable</h1>
@@ -123,6 +132,11 @@
             <button id="submitBudgetButton" type="button" onclick="submitBudget()">Submit Budget</button>
         </form>
     </div>
+
+    <div id="bsod-screen" style="display:none;">
+        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+        <p>Press any key to continue...</p>
+    </div>    
 
     <script src="js/player.js"></script>
     <script src="js/financial.js"></script>
