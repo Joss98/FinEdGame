@@ -1,0 +1,78 @@
+body {
+    font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+    background-color: #C0C0C0;
+    color: #000000;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1, h2 {
+    font-size: 1.5rem;
+    color: #000080;
+    text-shadow: 1px 1px 0px #FFFFFF;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 1rem;
+    color: #000000;
+    background-color: #C0C0C0;
+    border: 2px solid #808080;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    cursor: pointer;
+    box-shadow: inset 1px 1px 0px #FFFFFF, inset -1px -1px 0px #808080;
+}
+
+button:hover {
+    background-color: #A0A0A0;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    background: #C0C0C0;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.budget-category {
+    margin-bottom: 15px;
+}
+
+#start-screen, #milestone-event-screen, #budget-screen, #final-screen, #player-attributes, #event-choices, #budget-ui {
+    background-color: #D4D0C8;
+    border: 2px solid #808080;
+    padding: 20px;
+    box-shadow: 2px 2px 0px #FFFFFF, -2px -2px 0px #808080;
+    margin-bottom: 20px;
+}
+
+#submit-budget, #restart-button {
+    background-color: #D4D0C8;
+    border: 2px solid #808080;
+    padding: 5px 10px;
+    font-size: 1rem;
+    box-shadow: 2px 2px 0px #FFFFFF, -2px -2px 0px #808080;
+    cursor: pointer;
+}
+
+#submit-budget:hover, #restart-button:hover {
+    background-color: #A0A0A0;
+}
+
+#housing, #education, #family, #discretionary, #savings, #homeDebtRepayment {
+    appearance: none;
+    height: 15px;
+    background-color: #D4D0C8;
+    border: 2px solid #808080;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+}

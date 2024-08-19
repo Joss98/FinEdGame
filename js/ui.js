@@ -34,6 +34,18 @@ function hideChoices() {
     document.getElementById('event-description').textContent = 'No events triggered yet.';
 }
 
+// Add interactivity to UI
+
+function startGame() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('milestone-event-screen').style.display = 'block';
+}
+
+function submitBudget() {
+    document.getElementById('budget-screen').style.display = 'none';
+    document.getElementById('final-screen').style.display = 'block';
+}
+
 // Budget UI
 
 function showBudgetUI() {
