@@ -27,6 +27,19 @@ function updateBudgetAttributesUI() {
     document.getElementById('homeDebtRepayment-allocation').textContent = budgetCategories.homeDebtRepayment;
 }
 
+function toggleBudgetUI() {
+    let budgetUI = document.getElementById('budget-ui');
+    let toggleButton = document.getElementById('toggle-budget-button');
+    
+    if (budgetUI.style.display === 'none' || budgetUI.style.display === '') {
+        budgetUI.style.display = 'block';
+        toggleButton.textContent = 'Hide Budget';
+    } else {
+        budgetUI.style.display = 'none';
+        toggleButton.textContent = 'Show Budget';
+    }
+}
+
 function hideChoices() {
     document.getElementById('choice1').style.display = 'none';
     document.getElementById('choice2').style.display = 'none';
@@ -76,7 +89,7 @@ function submitBudget() {
     document.getElementById('final-screen').style.display = 'block';
 }
 
-// Budget UI
+// Budget UI show/hide
 
 function showBudgetUI() {
     document.getElementById('budget-ui').style.display = 'block';

@@ -54,6 +54,9 @@
     </div>
     </div>
 
+    <!-- Toggle button for Budget UI-->
+    <button id="toggle-budget-button" onclick="toggleBudgetUI()">Show Budget</button>
+
     <!-- Budget Screen -->
     <div id="budget-screen" style="display:none;">
         <h2>Annual Budget</h2>
@@ -69,6 +72,10 @@
             <label for="family">Family:</label>
             <input type="range" id="family" name="family" min="0" max="100" value="0" oninput="updateBudget(this.value, 'family')">
             <span id="family-percent">0%</span><br>
+
+            <label for="transportation">Transportation:</label>
+            <input type="range" id="transportation" name="transportation" min="0" max="100" value="0" oninput="updateBudget(this.value, 'transportation')">
+            <span id="transportation-percent">0%</span><br>
     
             <label for="discretionary">Discretionary Spending:</label>
             <input type="range" id="discretionary" name="discretionary" min="0" max="100" value="0" oninput="updateBudget(this.value, 'discretionary')">
