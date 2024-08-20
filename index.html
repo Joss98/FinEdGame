@@ -37,19 +37,33 @@
     <!-- Start Screen -->
     <div id="start-screen">
         <h1>Accounts Playable</h1>
-        <button id="start-button" onclick="startGame()">Start Game</button>
+        <p>This is a proof of concept in the early stages of development.</p>
+        <button id="start-button" onclick="startGame()">Start</button>
     </div>
 
-    <!-- Player Attributes -->
-    <div id="player-attributes" style="display: none;">
+    <!-- Player Attributes UI -->
+    <div id="player-attributes" class="dialog-box" style="display: none;">
         <h2>Player Attributes</h2>
-        <p><strong>Net Worth:</strong> <span id="net-worth">0</span></p>
-        <p><strong>Income:</strong> <span id="income">0</span></p>
-        <p><strong>Savings Rate:</strong> <span id="savings-rate">0%</span></p>
-        <p><strong>Expense Rate:</strong> <span id="expense-rate">0%</span></p>
-        <p><strong>Current Year:</strong> <span id="current-year">0</span></p>
-        <p><strong>Player Age:</strong> <span id="player-age">0</span></p>
+        <div class="attribute">
+            <strong>Net Worth:</strong> <span id="net-worth">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Income:</strong> <span id="income">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Savings Rate:</strong> <span id="savings-rate">0%</span>
+        </div>
+        <div class="attribute">
+            <strong>Expense Rate:</strong> <span id="expense-rate">0%</span>
+        </div>
+        <div class="attribute">
+            <strong>Current Year:</strong> <span id="current-year">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Player Age:</strong> <span id="player-age">0</span>
+        </div>
     </div>
+
 
     <!-- Milestone Event Screen -->
     <div id="milestone-event-screen" style="display:none;">
@@ -151,6 +165,7 @@
 
     <div id="bsod-screen" style="display:none;">
         <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+        <p>Just Kidding! But the game has reached its final year. Let's see your results!</p>
         <p>Press any key to continue...</p>
     </div>    
 

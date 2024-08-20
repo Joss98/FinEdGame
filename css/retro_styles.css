@@ -219,3 +219,37 @@ button:hover {
 body {
     padding-top: 40px;
 }
+
+.dialog-box {
+    background-color: #D4D0C8;
+    border: 2px solid #808080;
+    padding: 10px;
+    margin-top: 20px;
+    width: 300px;
+    box-shadow: 2px 2px 0px #FFFFFF, -2px -2px 0px #808080;
+    font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+}
+
+.dialog-box h2 {
+    font-size: 1.2rem;
+    color: #000080;
+    margin-bottom: 10px;
+}
+
+.attribute {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #000000;
+}
+
+.attribute strong {
+    display: inline-block;
+    width: 120px; /* Adjust width to align text */
+}
+
+#player-attributes span {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #FFFFFF;
+    border: 1px inset #C0C0C0;
+    padding: 2px 5px;
+}

@@ -56,6 +56,7 @@ if (currentYear < 45) { // Only increment if the year is less than 45
         // Disable the nextYear button if the game has reached the final year
         document.getElementById('nextYearButton').disabled = true;
         console.log('The game has reached the final year. No further progress can be made.');
+        showBSOD();
     }
 }
 

@@ -82,6 +82,7 @@ function showBSOD() {
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('milestone-event-screen').style.display = 'block';
+    document.getElementById('player-attributes').style.display = 'block';
 }
 
 function submitBudget() {
