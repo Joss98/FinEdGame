@@ -27,6 +27,17 @@ function updateBudgetAttributesUI() {
     document.getElementById('homeDebtRepayment-allocation').textContent = budgetCategories.homeDebtRepayment;
 }
 
+function toggleBudgetUI() {
+    let budgetUI = document.getElementById('budget-ui');
+    let toggleButton = document.getElementById('toggle-budget-button');
+    
+    if (budgetUI.style.display === 'none' || budgetUI.style.display === '') {
+        budgetUI.style.display = 'block';
+    } else {
+        budgetUI.style.display = 'none';
+    }
+}
+
 function hideChoices() {
     document.getElementById('choice1').style.display = 'none';
     document.getElementById('choice2').style.display = 'none';
@@ -34,7 +45,52 @@ function hideChoices() {
     document.getElementById('event-description').textContent = 'No events triggered yet.';
 }
 
-// Budget UI
+// Add interactivity to UI
+
+window.onload = function() {
+    let bootScreen = document.getElementById('boot-screen');
+    let startScreen = document.getElementById('start-screen');
+    let menuBar = document.getElementById('menu-bar');
+    
+    // Play Windows 98 startup sound
+    let startupSound = new Audio('assets/sounds/Windows 98 Startup Sound.mp3');
+    startupSound.play();
+
+    // Hide boot screen after animation completes
+    setTimeout(function() {
+        bootScreen.style.display = 'none';
+        startScreen.style.display = 'block';
+        menuBar.style.display = 'flex';
+    }, 5000);
+};
+
+function closeWindow(id) {
+    let element = document.getElementById(id);
+    element.classList.add('window-close');
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 500); // Match the animation duration
+}
+
+function showBSOD() {
+    document.getElementById('bsod-screen').style.display = 'block';
+    document.body.onkeydown = function() {
+        document.getElementById('bsod-screen').style.display = 'none';
+    };
+}
+
+function startGame() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('milestone-event-screen').style.display = 'block';
+    document.getElementById('player-attributes').style.display = 'block';
+}
+
+function submitBudget() {
+    document.getElementById('budget-screen').style.display = 'none';
+    document.getElementById('final-screen').style.display = 'block';
+}
+
+// Budget UI show/hide
 
 function showBudgetUI() {
     document.getElementById('budget-ui').style.display = 'block';
