@@ -51,17 +51,12 @@ if (currentYear < 45) { // Only increment if the year is less than 45
         Player.childrenAge++;
     }
     triggerMilestoneEvent(currentYear);
-    if (eventTriggeredLastYear) {
-        showBudgetUI();
-    } else {
-        hideBudgetUI();
-    }
-    
     updateUI();
     } else {
         // Disable the nextYear button if the game has reached the final year
         document.getElementById('nextYearButton').disabled = true;
         console.log('The game has reached the final year. No further progress can be made.');
+        showBSOD();
     }
 }
 

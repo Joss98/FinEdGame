@@ -21,9 +21,8 @@ const milestoneEvents = [
                 Player.isStudent = true;
                 Player.educationLevel = "cegep";
             },
-            "Start Working Full-Time": function() {
-                Player.income += 25000; // Immediate income from full-time job
-                Player.isStudent = false;
+            "Attend Vocational Training": function() {
+                Player.isStudent; // Immediate income from vocational training
                 Player.isWorking = true;
             }
         },

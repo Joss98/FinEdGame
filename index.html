@@ -4,47 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accounts Playable</title>
+    <link rel="stylesheet" href="css/retro_styles.css">
+    <link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/favicon/site.webmanifest">
 </head>
 <body>
-    <h1>Accounts Playable</h1>
+
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+        <div id="boot-logo">
+            <img src="assets/images/boot/Windows_98_logo.svg" alt="Windows 98 Logo">
+        </div>
+        <div id="boot-bar">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
     
-    <!-- Player Attributes -->
-    <div id="player-attributes">
-        <h2>Player Attributes</h2>
-        <p><strong>Net Worth:</strong> <span id="net-worth">0</span></p>
-        <p><strong>Income:</strong> <span id="income">0</span></p>
-        <p><strong>Savings Rate:</strong> <span id="savings-rate">0%</span></p>
-        <p><strong>Expense Rate:</strong> <span id="expense-rate">0%</span></p>
-        <p><strong>Current Year:</strong> <span id="current-year">0</span></p>
-        <p><strong>Player Age:</strong> <span id="player-age">0</span></p>
+    <!-- Menu Bar -->
+    <div id="menu-bar">
+        <ul>
+            <li class="menu-item">File</li>
+            <li class="menu-item">Edit</li>
+            <li class="menu-item">View</li>
+            <li class="menu-item" onclick="toggleBudgetUI()"> Toggle Budget</li>
+            <li class="menu-item">Help</li>
+        </ul>
+    </div>
+    
+    <!-- Start Screen -->
+    <div id="start-screen">
+        <h1>Accounts Playable</h1>
+        <p>This is a proof of concept in the early stages of development.</p>
+        <button id="start-button" onclick="startGame()">Start</button>
     </div>
 
-    <!-- Budget Attributes -->
-     <div id="budget-attributes">
-        <h2>Budget Attributes</h2>
-        <p><strong>Housing: </strong> <span id="housing-allocation">0</span></p>
-        <p><strong>Education: </strong><span id="education-allocation">0</span></p>
-        <p><strong>Family: </strong><span id="family-allocation">0</span></p>
-        <p><strong>Transportation: </strong><span id="transportation-allocation">0</span></p>
-        <p><strong>Discretionary: </strong><span id="discretionary-allocation">0</span></p>
-        <p><strong>Savings: </strong><span id="savings-allocation">0</span></p>
-        <p><strong>Home Debt Repayment: </strong><span id="homeDebtRepayment-allocation">0</span></p>
-     </div>
+    <!-- Player Attributes UI -->
+    <div id="player-attributes" class="dialog-box" style="display: none;">
+        <h2>Player Attributes</h2>
+        <div class="attribute">
+            <strong>Net Worth:</strong> <span id="net-worth">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Income:</strong> <span id="income">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Savings Rate:</strong> <span id="savings-rate">0%</span>
+        </div>
+        <div class="attribute">
+            <strong>Expense Rate:</strong> <span id="expense-rate">0%</span>
+        </div>
+        <div class="attribute">
+            <strong>Current Year:</strong> <span id="current-year">0</span>
+        </div>
+        <div class="attribute">
+            <strong>Player Age:</strong> <span id="player-age">0</span>
+        </div>
+    </div>
+
+
+    <!-- Milestone Event Screen -->
+    <div id="milestone-event-screen" style="display:none;">
+        <div class="event-card">
+            <p id="event-description">Proceed to the next year to get a fresh milestone.</p>
+            <button id="choice1" onclick="chooseOption(1)"></button>
+            <button id="choice2" onclick="chooseOption(2)"></button>
+            <button id="choice3" onclick="chooseOption(3)"></button>
+        </div>
+        <!-- Controls -->
+        <div id="controls">
+        <br>
+        <button id="nextYearButton" onclick="nextYear()">Next Year</button>
+    </div>
+    </div>
+
+    <!-- Budget Screen -->
+    <div id="budget-screen" style="display:none;">
+        <h2>Annual Budget</h2>
+        <div class="budget-category">
+            <label for="housing">Housing:</label>
+            <input type="range" id="housing" min="0" max="100" oninput="updateBudget(this.value, 'housing')">
+            <span id="housing-percent">0%</span>
+
+            <label for="education">Education:</label>
+            <input type="range" id="education" name="education" min="0" max="100" value="0" oninput="updateBudget(this.value, 'education')">
+            <span id="education-percent">0%</span><br>
+    
+            <label for="family">Family:</label>
+            <input type="range" id="family" name="family" min="0" max="100" value="0" oninput="updateBudget(this.value, 'family')">
+            <span id="family-percent">0%</span><br>
+
+            <label for="transportation">Transportation:</label>
+            <input type="range" id="transportation" name="transportation" min="0" max="100" value="0" oninput="updateBudget(this.value, 'transportation')">
+            <span id="transportation-percent">0%</span><br>
+    
+            <label for="discretionary">Discretionary Spending:</label>
+            <input type="range" id="discretionary" name="discretionary" min="0" max="100" value="0" oninput="updateBudget(this.value, 'discretionary')">
+            <span id="discretionary-percent">0%</span><br>
+    
+            <label for="savings">Savings:</label>
+            <input type="range" id="savings" name="savings" min="0" max="100" value="0" oninput="updateBudget(this.value, 'savings')">
+            <span id="savings-percent">0%</span><br>
+    
+            <label for="homeDebtRepayment">Home Debt Repayment:</label>
+            <input type="range" id="homeDebtRepayment" name="homeDebtRepayment" min="0" max="100" value="0" oninput="updateBudget(this.value, 'homeDebtRepayment')">
+            <span id="homeDebtRepayment-percent">0%</span><br>
+        </div>
+        <button id="submit-budget" onclick="submitBudget()">Submit Budget</button>
+    </div>
+
+    <!-- Final Net Worth Calculation Screen -->
+    <div id="final-screen" style="display:none;">
+        <h2>Game Over</h2>
+        <p>Your Final Net Worth: <span id="final-net-worth"></span></p>
+        <p id="feedback">[Feedback Here]</p>
+        <button id="restart-button" onclick="restartGame()">Play Again</button>
+    </div>
 
     <!-- Event Choices -->
-    <div id="event-choices">
+    <div id="event-choices" style="display: none;">
         <h2>Event Choices</h2>
         <p id="event-description">No events triggered yet.</p>
         <button id="choice1" style="display:none"></button>
         <button id="choice2" style="display:none"></button>
         <button id="choice3" style="display:none"></button>
     </div>
-
-    <!-- Controls -->
-    <div id="controls">
-        <button id="nextYearButton" onclick="nextYear()">Next Year</button>
-    </div>
-    <br>
+    
     <div id="budget-ui" style="display: none;">
         <h2>Annual Budget</h2>
         <form id="budget-form">
@@ -76,6 +163,12 @@
         </form>
     </div>
 
+    <div id="bsod-screen" style="display:none;">
+        <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+        <p>Just Kidding! But the game has reached its final year. Let's see your results!</p>
+        <p>Press any key to continue...</p>
+    </div>    
+
     <script src="js/player.js"></script>
     <script src="js/financial.js"></script>
     <script src="js/ui.js"></script>
@@ -84,5 +177,6 @@
     <script src="js/logging.js"></script>
     <script src="js/gameplay.js"></script>
     <script src="js/main.js"></script>
+
 </body>
 </html>
