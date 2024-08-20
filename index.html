@@ -12,6 +12,7 @@
     <link rel="manifest" href="assets/images/favicon/site.webmanifest">
 </head>
 <body>
+
     <!-- Boot Screen -->
     <div id="boot-screen">
         <div id="boot-logo">
@@ -20,6 +21,17 @@
         <div id="boot-bar">
             <div id="progress-bar"></div>
         </div>
+    </div>
+    
+    <!-- Menu Bar -->
+    <div id="menu-bar">
+        <ul>
+            <li class="menu-item">File</li>
+            <li class="menu-item">Edit</li>
+            <li class="menu-item">View</li>
+            <li class="menu-item" onclick="toggleBudgetUI()"> Toggle Budget</li>
+            <li class="menu-item">Help</li>
+        </ul>
     </div>
     
     <!-- Start Screen -->
@@ -53,9 +65,6 @@
         <button id="nextYearButton" onclick="nextYear()">Next Year</button>
     </div>
     </div>
-
-    <!-- Toggle button for Budget UI-->
-    <button id="toggle-budget-button" onclick="toggleBudgetUI()">Show Budget</button>
 
     <!-- Budget Screen -->
     <div id="budget-screen" style="display:none;">

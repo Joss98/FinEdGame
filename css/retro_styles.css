@@ -154,3 +154,68 @@ button:hover {
     text-align: center;
     z-index: 1000;
 }
+
+#menu-bar {
+    background-color: #C0C0C0;
+    border-bottom: 2px solid #808080;
+    padding: 4px;
+    font-family: 'MS Sans Serif', 'Tahoma', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: none;
+}
+
+#menu-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu-item {
+    position: relative;
+    padding: 2px 10px;
+    margin-right: 4px;
+    background-color: #C0C0C0;
+    border: 1px solid #C0C0C0;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #A0A0A0;
+    border: 1px solid #808080;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #C0C0C0;
+    border: 1px solid #808080;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    min-width: 100px;
+}
+
+.menu-item:hover .dropdown {
+    display: block;
+}
+
+.dropdown li {
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #A0A0A0;
+}
+
+/* Add padding to the rest of the content to avoid overlap with the fixed menu bar */
+body {
+    padding-top: 40px;
+}

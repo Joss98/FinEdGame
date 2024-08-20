@@ -33,10 +33,8 @@ function toggleBudgetUI() {
     
     if (budgetUI.style.display === 'none' || budgetUI.style.display === '') {
         budgetUI.style.display = 'block';
-        toggleButton.textContent = 'Hide Budget';
     } else {
         budgetUI.style.display = 'none';
-        toggleButton.textContent = 'Show Budget';
     }
 }
 
@@ -52,6 +50,7 @@ function hideChoices() {
 window.onload = function() {
     let bootScreen = document.getElementById('boot-screen');
     let startScreen = document.getElementById('start-screen');
+    let menuBar = document.getElementById('menu-bar');
     
     // Play Windows 98 startup sound
     let startupSound = new Audio('assets/sounds/Windows 98 Startup Sound.mp3');
@@ -61,6 +60,7 @@ window.onload = function() {
     setTimeout(function() {
         bootScreen.style.display = 'none';
         startScreen.style.display = 'block';
+        menuBar.style.display = 'flex';
     }, 5000);
 };
 
