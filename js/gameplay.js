@@ -22,7 +22,7 @@ function triggerMilestoneEvent(currentYear) {
             // Setup choice buttons
             const choices = Object.keys(event.choices);
             for (let i = 0; i < choices.length; i++) {
-                const button = document.getElementById(`choice${i+1}`);
+                const button = document.getElementById(`choice${i + 1}`);
                 button.textContent = choices[i];
                 button.style.display = 'inline';
                 button.onclick = () => {
@@ -43,15 +43,16 @@ function triggerMilestoneEvent(currentYear) {
 }
 
 function nextYear() {
-if (currentYear < 45) { // Only increment if the year is less than 45
-    currentYear += 1;
-    Player.age = currentYear + 18;
-    Player.parentsAge = currentYear + 46;
-    if (Player.hasChildren) {
-        Player.childrenAge++;
-    }
-    triggerMilestoneEvent(currentYear);
-    updateUI();
+    if (currentYear < 45) { // Only increment if the year is less than 45
+        currentYear += 1;
+        Player.age = currentYear + 18;
+        Player.parentsAge = currentYear + 46;
+        if (Player.hasChildren) {
+            Player.childrenAge++;
+        }
+        triggerMilestoneEvent(currentYear);
+        triggerDisruptiveEvent();
+        updateUI();
     } else {
         // Disable the nextYear button if the game has reached the final year
         document.getElementById('nextYearButton').disabled = true;
@@ -61,7 +62,7 @@ if (currentYear < 45) { // Only increment if the year is less than 45
 }
 
 // trigger disruptive events randomly
-/* function triggerDisruptiveEvent() {
+function triggerDisruptiveEvent() {
     const eventChance = Math.random();
     if (eventChance < 0.3) { // 30% chance to trigger a disruptive event
         const eventIndex = Math.floor(Math.random() * disruptiveEvents.length);
@@ -69,14 +70,16 @@ if (currentYear < 45) { // Only increment if the year is less than 45
         if (disruptiveEvent.prerequisites(Player)) {
             disruptiveEvent.impact(Player);
             logEvent(Player.yearsPlayed, disruptiveEvent.name, "A disruptive event occurred: " + disruptiveEvent.description, Player);
+            alert(`Disruptive Event: ${disruptiveEvent.name}\n${disruptiveEvent.description}`);
         }
     }
-} */
+}
 
 // Simulate passing years and potentially triggering disruptive events
 
 for (let gameYear = 0; gameYear <= 45; gameYear++) {
     Player.age = gameYear + 18; // Map game year to player age
-    // triggerDisruptiveEvent();
+    // triggerDisruptiveEvent(); // NOTE: This loop seems to be for simulation/testing, not the main game loop.
+    // The main game loop is driven by the 'nextYear' function.
     Player.yearsPlayed += 1;
 }
