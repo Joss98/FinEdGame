@@ -30,7 +30,7 @@ function updateBudgetAttributesUI() {
 function toggleBudgetUI() {
     let budgetUI = document.getElementById('budget-ui');
     let toggleButton = document.getElementById('toggle-budget-button');
-    
+
     if (budgetUI.style.display === 'none' || budgetUI.style.display === '') {
         budgetUI.style.display = 'block';
     } else {
@@ -47,17 +47,17 @@ function hideChoices() {
 
 // Add interactivity to UI
 
-window.onload = function() {
+window.onload = function () {
     let bootScreen = document.getElementById('boot-screen');
     let startScreen = document.getElementById('start-screen');
     let menuBar = document.getElementById('menu-bar');
-    
+
     // Play Windows 98 startup sound
     let startupSound = new Audio('assets/sounds/Windows 98 Startup Sound.mp3');
     startupSound.play();
 
     // Hide boot screen after animation completes
-    setTimeout(function() {
+    setTimeout(function () {
         bootScreen.style.display = 'none';
         startScreen.style.display = 'block';
         menuBar.style.display = 'flex';
@@ -74,9 +74,30 @@ function closeWindow(id) {
 
 function showBSOD() {
     document.getElementById('bsod-screen').style.display = 'block';
-    document.body.onkeydown = function() {
+    document.body.onkeydown = function () {
         document.getElementById('bsod-screen').style.display = 'none';
+        document.body.onkeydown = null; // Remove the event listener
+        showFinalScreen();
     };
+}
+
+async function showFinalScreen() {
+    document.getElementById('final-screen').style.display = 'block';
+    document.getElementById('final-net-worth').textContent = Player.netWorth.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+    renderNetWorthChart('net-worth-chart', getGameLog());
+
+    const feedbackElement = document.getElementById('feedback');
+    feedbackElement.textContent = "Consulting the Virtual Financial Advisor...";
+
+    try {
+        const response = await sendPlayerDataToAPI(getGameLog());
+        const data = receivePlayerDataFromAPI(response);
+        feedbackElement.textContent = data.feedback;
+    } catch (error) {
+        console.error("Error fetching feedback:", error);
+        feedbackElement.textContent = "The Virtual Financial Advisor is currently unavailable.";
+    }
 }
 
 function startGame() {
